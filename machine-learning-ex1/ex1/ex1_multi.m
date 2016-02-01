@@ -107,8 +107,10 @@ fprintf('\n');
 x = [1650, 3] ;
 x_norm = (x-mu) ./sigma ;
 x_norm = [1 x_norm] ;
+fprintf('Normalized x : %f \n',x_norm);
 
 price = x_norm* theta; % You should change this
+
 
 
 % ============================================================
@@ -153,7 +155,8 @@ fprintf('\n');
 
 % Estimate the price of a 1650 sq-ft, 3 br house
 % ====================== YOUR CODE HERE ======================
-price = 0; % You should change this
+
+price = X * theta ; % You should change this
 
 
 % ============================================================
