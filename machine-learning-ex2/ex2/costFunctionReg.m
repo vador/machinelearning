@@ -23,7 +23,7 @@ h_theta = sigmoid(X*theta);
 grad_factor = lambda / m * theta;
 grad_factor(1) = 0 ;
 
-reg_factor = lambda / (2*m) * sum(theta(1:size(theta),:).^2) ;
+reg_factor = lambda / (2*m) * sum(theta(2:size(theta),:).^2) ;
 
 J = -1/m*((y'*log(h_theta))+((1-y)'*log(1-h_theta))) + reg_factor ;
 
