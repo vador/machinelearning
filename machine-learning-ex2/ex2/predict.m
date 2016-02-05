@@ -17,7 +17,7 @@ p = zeros(m, 1);
 
 %prob = sigmoid([1 45 85] * theta);
 pred = sigmoid(X*theta) ;
-p = arrayfun( @(x) x>=0.5, pred) ;
+[vp, p] = arrayfun( @(x) x>=0.5, pred) ;
 
 
 

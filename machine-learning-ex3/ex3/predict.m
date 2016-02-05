@@ -20,13 +20,11 @@ p = zeros(size(X, 1), 1);
 %       information see 'help max'. If your examples are in rows, then, you
 %       can use max(A, [], 2) to obtain the max for each row.
 %
-
-
-
-
-
-
-
+a0 = [ones(size(X, 1), 1) X];
+z1 = sigmoid(a0 * Theta1');
+a1 = [ones(size(z1, 1), 1) z1];
+z2 = sigmoid(a1 * Theta2');
+[vp, p] = max(z2, [],2);
 
 
 % =========================================================================
