@@ -61,10 +61,19 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
+ % y_i = eye(num_labels)(:,y(i))
 
+Yb = eye(num_labels)(:,y) ;% Y(:,i) is y^(i) as binary vector  
 
+a1= [ones(size(X, 1), 1) X];
+z2 = (a1 * Theta1');
+a2 = [ones(size(z2, 1), 1) sigmoid(z2)];
+z3 = (a2 * Theta2');
+h_theta = sigmoid(z3); % this is h_theta(x)
+% [vp, p] = max(a3, [],2); % Prediction in p
+reg_factor ) 0 ;
 
-
+J = -1/m*((y'*log(h_theta))+((1-y)'*log(1-h_theta))) + reg_factor ;
 
 
 
