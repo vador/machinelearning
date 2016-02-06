@@ -63,13 +63,13 @@ Theta2_grad = zeros(size(Theta2));
 %
  % y_i = eye(num_labels)(:,y(i))
 
-Yb = eye(num_labels)(:,y) ;% Y(:,i) is y^(i) as binary vector  
-
+Yb = eye(num_labels)(:,y) ;% Y(:,i) is y^(i) as binary vector  Yb is in columns
+% Yb size is K*m
 a1= [ones(size(X, 1), 1) X];
 z2 = (a1 * Theta1');
 a2 = [ones(size(z2, 1), 1) sigmoid(z2)];
 z3 = (a2 * Theta2');
-a3 = sigmoid(z3); % this is h_theta(x)
+a3 = sigmoid(z3); % this is h_theta(x) size is m*K
 %[vp, p] = max(a3, [],2); % Prediction in p
 h_theta = a3 ;
 reg_factor = 0 ;
@@ -82,16 +82,19 @@ end
 
 J = -1/m * J ;
 
-delta_3_full = (a3 - Yb')
+delta_3_full = (a3 - Yb') ; % size is m*K
 
-%DELTA_3 = 0 ;
-%DELTA_2 = zeros(size(),1) ;
-%DELTA_1 = 0 ;
+DELTA_1 = zeros(size(Theta1)) ; % u2 * (u1+1)
+DELTA_2 = zeros(size(Theta2)) ; % K * (u2+1)
+
 for i = 1:m
   delta_3 = delta_3_full(i,:)' ; % K*1 size
-  delta_2 = Theta2' * delta_3 .* sigmoidGradient(z2(i,:)); % u_2 * 1 size
-  DELTA_2 = DELTA_2 + delta_3 * a2(i,:)' ;
-  DELTA_1 = DELTA_1 + delta_2(2:end) * a1(i,:)' ;
+  fprintf("delta_3 size %f, %f\n",size(delta_3,1), size(delta_3,2));
+
+  delta_2 = (Theta2' * delta_3)(2:end) .* sigmoidGradient(z2(i,:)'); % u_2+1 * 1 size
+  fprintf("delta_2 size %f, %f\n",size(delta_2,1), size(delta_2,2));
+  DELTA_2 = DELTA_2 + delta_3 * a2(i,:) ; % K * (u2+1)
+  DELTA_1 = DELTA_1 + (delta_2 * a1(i,:)) ; % u2 * 
 end
 
 Theta1_grad = DELTA_1 ;
