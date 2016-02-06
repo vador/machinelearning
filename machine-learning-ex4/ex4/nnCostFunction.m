@@ -81,6 +81,22 @@ for i = 1:m
 end
 
 J = -1/m * J ;
+
+delta_3_full = (a3 - Yb')
+
+%DELTA_3 = 0 ;
+%DELTA_2 = zeros(size(),1) ;
+%DELTA_1 = 0 ;
+for i = 1:m
+  delta_3 = delta_3_full(i,:)' ; % K*1 size
+  delta_2 = Theta2' * delta_3 .* sigmoidGradient(z2(i,:)); % u_2 * 1 size
+  DELTA_2 = DELTA_2 + delta_3 * a2(i,:)' ;
+  DELTA_1 = DELTA_1 + delta_2(2:end) * a1(i,:)' ;
+end
+
+Theta1_grad = DELTA_1 ;
+Theta2_grad = DELTA_2 ;
+
 % -------------------------------------------------------------
 
 % =========================================================================
