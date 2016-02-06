@@ -69,26 +69,18 @@ a1= [ones(size(X, 1), 1) X];
 z2 = (a1 * Theta1');
 a2 = [ones(size(z2, 1), 1) sigmoid(z2)];
 z3 = (a2 * Theta2');
-h_theta = sigmoid(z3); % this is h_theta(x)
-% [vp, p] = max(a3, [],2); % Prediction in p
-reg_factor ) 0 ;
+a3 = sigmoid(z3); % this is h_theta(x)
+%[vp, p] = max(a3, [],2); % Prediction in p
+h_theta = a3 ;
+reg_factor = 0 ;
 
-J = -1/m*((y'*log(h_theta))+((1-y)'*log(1-h_theta))) + reg_factor ;
+%J = -1/m*((Yb*log(h_theta))+((1-Yb)*log(1-h_theta))) + reg_factor ;
+for i = 1:m
+  tmp = (log(h_theta(i,:))*(Yb(:,i))+(log(1-h_theta(i,:)))*(1-Yb(:,i))) + reg_factor ;
+  J = J+tmp ;
+end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+J = -1/m * J ;
 % -------------------------------------------------------------
 
 % =========================================================================
