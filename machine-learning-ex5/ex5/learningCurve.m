@@ -55,7 +55,6 @@ error_val   = zeros(m, 1);
 
 
   for i = 1:m
-    lambda = 0;
     [theta] = trainLinearReg(X(1:i,:), y(1:i,:), lambda);
     [J, grad] = linearRegCostFunction(X(1:i, :), y(1:i), theta, 0);
     error_train(i) = J ;
