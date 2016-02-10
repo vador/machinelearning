@@ -24,8 +24,10 @@ grad = zeros(size(theta));
 % grad : n*1
 % X*theta : m*1
 
-reg_factor = lambda / (2*m) * (theta(2:end)).^2 ;
+reg_factor = lambda / (2*m) * sum((theta(2:end)).^2) ;
 J = 1/2 / m * sum((X*theta-y) .^2) + reg_factor ;
+%z = X*theta- y ;
+%J = 1/(2*m)*sum(z.^2) ;
 
 gradreg_fact = zeros(size(theta)) ;
 gradreg_fact = lambda / m * theta ;
